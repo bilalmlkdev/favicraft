@@ -8,11 +8,13 @@ import { FaqSection } from "./components/sections/FaqSection";
 import { TestimonialsSection } from "./components/sections/TestimoinalsSection";
 import { HowItWorksSection } from "./components/sections/HowitWorksSection";
 import GeneratorWorkspace from "./components/generator/GeneratorWorkspace";
-import type { Mode } from "./types";
+import { Loader } from "./components/ui/Loader";
+import  type { Mode } from "./types";
 
 export default function App() {
   const lenisRef = useRef<Lenis | null>(null);
   const [mode, setMode] = useState<Mode>("text");
+  const [isAppLoading, setIsAppLoading] = useState(true);
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -25,6 +27,12 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
+  // Simulate initial app load
+  useEffect(() => {
+    const timer = setTimeout(() => setIsAppLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   // const scrollToGenerator = () => {
   //   if (lenisRef.current) {
   //     lenisRef.current.scrollTo("#generator", { duration: 1.2 });
@@ -34,6 +42,14 @@ export default function App() {
   //       ?.scrollIntoView({ behavior: "smooth" });
   //   }
   // };
+
+  if (isAppLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--bg)]">
+        <Loader size={48} color="var(--accent)" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen font-DM transition-colors relative duration-300 antialiased selection:bg-indigo-500/30">
