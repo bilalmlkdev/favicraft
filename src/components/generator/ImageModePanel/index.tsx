@@ -1,23 +1,15 @@
 // ImageModePanel – main container
-import { ChangeEvent, DragEvent } from "react";
-import {
-  Download,
-  CheckCircle2,
-  RefreshCw,
-  Trash2,
-  Upload,
-  ImagePlusIcon,
-} from "lucide-react";
+import { Download, CheckCircle2 } from "lucide-react";
 import { Panel } from "../../ui/Panel";
 import { IconPreview } from "../../ui/IconPreview";
 import { FaviconPreview } from "../FaviconPreview";
 import { ImageUpload } from "./ImageUpload";
-import { GeneratedList } from "../TextModePanel/GeneratedList"; // reusing the same component
+import { GeneratedList } from "../TextModePanel/GeneratedList";
 import { useImageMode } from "../../../hooks/useImageMode";
 
 interface Props extends ReturnType<typeof useImageMode> {
-  downloadSingleSize: (size: number, filename: string) => void;
-  generateZip: () => void;
+  downloadSingleSize: (size: number, filename: string) => Promise<void>;
+  generateZip: () => Promise<void>;
 }
 
 export function ImageModePanel(props: Props) {

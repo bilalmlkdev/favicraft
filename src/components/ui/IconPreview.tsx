@@ -1,6 +1,4 @@
 // UI IconPreview
-import React from "react";
-
 export const IconPreview = ({
   image,
   size = 56,

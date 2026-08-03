@@ -25,23 +25,11 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
-  const scrollToGenerator = () => {
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo("#generator", { duration: 1.2 });
-    } else {
-      document
-        .getElementById("generator")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+ 
 
   return (
     <div className="min-h-screen font-DM transition-colors relative duration-300 antialiased selection:bg-indigo-500/30">
-      <Header
-        mode={mode}
-        setMode={setMode}
-        scrollToGenerator={scrollToGenerator}
-      />
+      <Header />
       <main className="max-w-[1380px] mx-auto px-6 lg:px-14 pt-40 pb-16 md:pb-16">
         <div className="relative overflow-hidden mb-20">
           <div

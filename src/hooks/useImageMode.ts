@@ -1,5 +1,6 @@
 // useImageMode
-import { useState, ChangeEvent, DragEvent } from "react";
+import { useState } from "react";
+import type { ChangeEvent, DragEvent } from "react";
 import { generateZip, downloadSingleSize } from "../utils/export";
 
 export function useImageMode() {

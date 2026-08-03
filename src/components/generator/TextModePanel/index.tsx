@@ -1,25 +1,49 @@
 // TextModePanel – main container
-import { Download, CheckCircle2 } from 'lucide-react';
-import { Panel } from '../../ui/Panel';
-import { FaviconPreview } from '../FaviconPreview';
-import { TextControls } from './TextControls';
-import { GeneratedList } from './GeneratedList';
-import { useTextMode } from '../../../hooks/useTextMode';
+import { Download, CheckCircle2 } from "lucide-react";
+import { Panel } from "../../ui/Panel";
+import { FaviconPreview } from "../FaviconPreview";
+import { TextControls } from "./TextControls";
+import { GeneratedList } from "./GeneratedList";
+import { useTextMode } from "../../../hooks/useTextMode";
 
 interface Props extends ReturnType<typeof useTextMode> {
-  downloadSingleSize: (size: number, filename: string) => void;
-  generateZip: () => void;
+  downloadSingleSize: (size: number, filename: string) => Promise<void>;
+  generateZip: () => Promise<void>;
 }
 
 export function TextModePanel(props: Props) {
   const {
-    textVal, fontFamily, fontColor, textBgColor, bgShape, fontWeight, fontSize,
-    letterSpacing, textRotation, shadowColor, shadowEnabled, shadowBlur, shadowOffsetX, shadowOffsetY,
-    strokeColor, strokeWidth, strokeEnabled, borderWidth, borderColor, borderStyle,
-    gradientEnabled, gradientColor1, gradientColor2, gradientAngle,
-    customRadius, padding, fontStyle,
-    isGenerating, successStatus,
-    downloadSingleSize, generateZip,
+    textVal,
+    fontFamily,
+    fontColor,
+    textBgColor,
+    bgShape,
+    fontWeight,
+    fontSize,
+    letterSpacing,
+    textRotation,
+    shadowColor,
+    shadowEnabled,
+    shadowBlur,
+    shadowOffsetX,
+    shadowOffsetY,
+    strokeColor,
+    strokeWidth,
+    strokeEnabled,
+    borderWidth,
+    borderColor,
+    borderStyle,
+    gradientEnabled,
+    gradientColor1,
+    gradientColor2,
+    gradientAngle,
+    customRadius,
+    padding,
+    fontStyle,
+    isGenerating,
+    successStatus,
+    downloadSingleSize,
+    generateZip,
   } = props;
 
   const renderTextIcon = (size: number = 56) => {
@@ -27,7 +51,8 @@ export function TextModePanel(props: Props) {
     if (customRadius !== null) {
       borderRadius = `${customRadius}%`;
     } else {
-      borderRadius = bgShape === 'Rounded' ? '22%' : bgShape === 'Circle' ? '50%' : '4px';
+      borderRadius =
+        bgShape === "Rounded" ? "22%" : bgShape === "Circle" ? "50%" : "4px";
     }
 
     const bgStyle = gradientEnabled
@@ -36,15 +61,17 @@ export function TextModePanel(props: Props) {
 
     const textShadow = shadowEnabled
       ? `${shadowOffsetX}px ${shadowOffsetY}px ${shadowBlur}px ${shadowColor}`
-      : 'none';
+      : "none";
 
-    const textStroke = strokeEnabled && strokeWidth > 0
-      ? `${strokeWidth}px ${strokeColor}`
-      : 'none';
+    const textStroke =
+      strokeEnabled && strokeWidth > 0
+        ? `${strokeWidth}px ${strokeColor}`
+        : "none";
 
-    const borderStyleStr = borderWidth > 0
-      ? `${borderWidth}px ${borderStyle} ${borderColor}`
-      : 'none';
+    const borderStyleStr =
+      borderWidth > 0
+        ? `${borderWidth}px ${borderStyle} ${borderColor}`
+        : "none";
 
     return (
       <div
@@ -56,7 +83,7 @@ export function TextModePanel(props: Props) {
           borderRadius,
           padding: `${padding}px`,
           border: borderStyleStr,
-          boxSizing: 'border-box',
+          boxSizing: "border-box",
         }}
       >
         <div
@@ -73,7 +100,7 @@ export function TextModePanel(props: Props) {
             lineHeight: 1,
           }}
         >
-          {textVal || 'F'}
+          {textVal || "F"}
         </div>
       </div>
     );
@@ -88,7 +115,9 @@ export function TextModePanel(props: Props) {
             {[64, 48, 32, 16].map((sz) => (
               <div key={sz} className="flex flex-col items-center gap-0.5">
                 {renderTextIcon(sz)}
-                <span className="text-[8px] font-mono text-[var(--text-faint)]">{sz}×{sz}</span>
+                <span className="text-[8px] font-mono text-[var(--text-faint)]">
+                  {sz}×{sz}
+                </span>
               </div>
             ))}
           </div>
@@ -104,7 +133,7 @@ export function TextModePanel(props: Props) {
             ) : (
               <Download className="w-3 h-3" />
             )}
-            {isGenerating ? 'Build' : successStatus ? 'Done' : 'Package'}
+            {isGenerating ? "Build" : successStatus ? "Done" : "Package"}
           </button>
         </div>
       </Panel>
@@ -112,8 +141,12 @@ export function TextModePanel(props: Props) {
       {/* 1. Design */}
       <Panel className="p-3 space-y-2">
         <div>
-          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">1. Design Your Favicon</h3>
-          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">Customize text, font, colors, and shape</p>
+          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">
+            1. Design Your Favicon
+          </h3>
+          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">
+            Customize text, font, colors, and shape
+          </p>
         </div>
         <TextControls {...props} />
       </Panel>
@@ -121,8 +154,12 @@ export function TextModePanel(props: Props) {
       {/* 2. Preview */}
       <Panel className="p-3 space-y-3">
         <div>
-          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">2. Preview</h3>
-          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">See how your favicon looks in real context</p>
+          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">
+            2. Preview
+          </h3>
+          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">
+            See how your favicon looks in real context
+          </p>
         </div>
         <FaviconPreview renderIcon={renderTextIcon} />
       </Panel>
@@ -130,10 +167,17 @@ export function TextModePanel(props: Props) {
       {/* 3. Generated */}
       <Panel className="p-3 space-y-3">
         <div>
-          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">3. Generated Favicons</h3>
-          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">Click to download individual sizes, or download all at once</p>
+          <h3 className="text-[12px] font-bold tracking-tight text-[var(--text)]">
+            3. Generated Favicons
+          </h3>
+          <p className="text-[11px] mt-0.5 font-medium text-[var(--text-muted)]">
+            Click to download individual sizes, or download all at once
+          </p>
         </div>
-        <GeneratedList renderIcon={renderTextIcon} downloadSingleSize={downloadSingleSize} />
+        <GeneratedList
+          renderIcon={renderTextIcon}
+          downloadSingleSize={downloadSingleSize}
+        />
         <button
           onClick={generateZip}
           disabled={isGenerating}
@@ -146,7 +190,11 @@ export function TextModePanel(props: Props) {
           ) : (
             <Download className="w-3.5 h-3.5" />
           )}
-          {isGenerating ? 'Building…' : successStatus ? 'Downloaded' : 'Download All'}
+          {isGenerating
+            ? "Building…"
+            : successStatus
+              ? "Downloaded"
+              : "Download All"}
         </button>
       </Panel>
     </div>
