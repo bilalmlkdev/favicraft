@@ -1,122 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// App root
+import { useEffect, useRef, useState } from "react";
+import Lenis from "lenis";
+import Header from "./components/layout/Header";
+import { Footer } from "./components/layout/Footer";
+import { FeaturesSection } from "./components/sections/FeaturesSection";
+import { FaqSection } from "./components/sections/FaqSection";
+import { TestimonialsSection } from "./components/sections/TestimoinalsSection";
+import { HowItWorksSection } from "./components/sections/HowitWorksSection";
+import GeneratorWorkspace from "./components/generator/GeneratorWorkspace";
+import type { Mode } from "./types";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const lenisRef = useRef<Lenis | null>(null);
+  const [mode, setMode] = useState<Mode>("text");
+
+  useEffect(() => {
+    const lenis = new Lenis();
+    lenisRef.current = lenis;
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
+
+  const scrollToGenerator = () => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo("#generator", { duration: 1.2 });
+    } else {
+      document
+        .getElementById("generator")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="min-h-screen font-DM transition-colors relative duration-300 antialiased selection:bg-indigo-500/30">
+      <Header
+        mode={mode}
+        setMode={setMode}
+        scrollToGenerator={scrollToGenerator}
+      />
+      <main className="max-w-[1380px] mx-auto px-6 lg:px-14 pt-40 pb-16 md:pb-16">
+        <div className="relative overflow-hidden mb-20">
+          <div
+            className="absolute inset-0 -z-10"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 70% 55% at 50% 50%, black 35%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 55% at 50% 50%, black 35%, transparent 100%)",
+            }}
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] bg-[size:48px_48px]" />
+          </div>
+          <div className="relative z-10 flex flex-col items-center text-center space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <span className="inline-flex items-center text-xs bg-linear-to-br from-white via-white to-blue-100/80 px-3 rounded-full shadow-sm border-transparent ring ring-neutral-600/20 py-1.5 text-[var(--text-muted)]">
+              Browser‑Based Favicon Generator
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-[102px] font-normal tracking-tight leading-[1.1] text-[var(--text)] font-gelasio">
+              Text. Image. Favicon.
+              <br />
+              Made Precisely.
+            </h1>
+            <p className="text-[16px] sm:text-[18px] max-w-[720px] leading-relaxed font-medium text-[var(--text-muted)]">
+              Design or upload a favicon, preview it at real browser sizes, and
+              export a complete package – ICO, PNG, Apple, Android, manifest,
+              and install snippets.
+            </p>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <div id="generator" className="scroll-mt-24">
+          <GeneratorWorkspace mode={mode} setMode={setMode} />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <FeaturesSection />
+        <HowItWorksSection />
+        <TestimonialsSection />
+        <FaqSection />
+      </main>
+      <Footer />
+    </div>
+  );
 }
-
-export default App
