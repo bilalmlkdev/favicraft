@@ -80,14 +80,14 @@ export default function GeneratorWorkspace({ mode, setMode }: Props) {
         <div className="px-1 py-1 inline-flex items-center text-xs bg-linear-to-br from-white via-white to-blue-100/80 rounded-full shadow-sm border-transparent ring ring-neutral-600/20 mb-2">
           <button
             onClick={() => handleTabClick("text")}
-            disabled={isSwitching}
+            disabled={true} // disabled until UI redesign
             className={`px-7 py-2.5 rounded-full text-[14px] transition-all duration-300 ${
               mode === "text" && !isSwitching
                 ? "bg-[var(--accent)] text-white"
                 : "text-[var(--text-muted)]"
             } ${isSwitching && pendingMode === "text" ? "opacity-50" : ""} ${
               isSwitching && mode === "text" ? "opacity-30" : ""
-            }`}
+            } cursor-not-allowed opacity-60`}
             style={
               mode === "text" && !isSwitching
                 ? { backgroundColor: "var(--accent)", color: "#ffffff" }
