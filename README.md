@@ -1,4 +1,4 @@
-![Favicraft Preview](./preview.png)
+![Favicraft Preview](./public/preview.png)
 
 <h1 align="center">Favicraft</h1>
 
