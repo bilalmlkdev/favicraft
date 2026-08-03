@@ -20,7 +20,7 @@ export default function Header() {
     <header className="fixed top-3 w-full max-w-[400px] left-1/2 -translate-x-1/2 h-12 rounded-full bg-black text-white z-50 border-b border-white/10">
       <div className="max-w-[400px] mx-auto h-full pl-5 pr-2 flex items-center justify-between relative">
         <div className="flex items-center gap-1.5">
-          <span className="font-bold text-[20px] tracking-tight font-gelasio">
+          <span className="font-bold text-[20px] tracking-tight font-gelasio relative top-0.5">
             Favicraft.
           </span>
         </div>

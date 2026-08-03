@@ -25,7 +25,15 @@ export default function App() {
     return () => lenis.destroy();
   }, []);
 
- 
+  // const scrollToGenerator = () => {
+  //   if (lenisRef.current) {
+  //     lenisRef.current.scrollTo("#generator", { duration: 1.2 });
+  //   } else {
+  //     document
+  //       .getElementById("generator")
+  //       ?.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
   return (
     <div className="min-h-screen font-DM transition-colors relative duration-300 antialiased selection:bg-indigo-500/30">

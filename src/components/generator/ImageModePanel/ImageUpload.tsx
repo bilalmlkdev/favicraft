@@ -1,5 +1,5 @@
 // ImageUpload – drop zone and file input
-import { ChangeEvent, DragEvent } from "react";
+import type { ChangeEvent, DragEvent } from "react";
 import { Upload, ImagePlusIcon, RefreshCw, Trash2 } from "lucide-react";
 
 interface Props {

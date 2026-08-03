@@ -1,16 +1,12 @@
 // Generator workspace (main controller)
-import { useState, ChangeEvent, DragEvent } from "react";
+import { useState } from "react";
 import { useTextMode } from "../../hooks/useTextMode";
 import { useImageMode } from "../../hooks/useImageMode";
 import { TextModePanel } from "./TextModePanel";
 import { ImageModePanel } from "./ImageModePanel";
 import { FaviconChecker } from "./FaviconChecker";
 import { ExportPanel } from "./ExportPanel";
-import {
-  generateZip,
-  downloadSingleSize,
-  getFrameworkSnippet,
-} from "../../utils/export";
+import { getFrameworkSnippet } from "../../utils/frameworkSnippets";
 
 type Mode = "text" | "image" | "checker";
 
@@ -26,11 +22,6 @@ export default function GeneratorWorkspace({ mode, setMode }: Props) {
   const [selectedFramework, setSelectedFramework] = useState("HTML");
   const [copiedCode, setCopiedCode] = useState(false);
   const [copiedAi, setCopiedAi] = useState(false);
-
-  const isGenerating =
-    mode === "text" ? textState.isGenerating : imageState.isGenerating;
-  const successStatus =
-    mode === "text" ? textState.successStatus : imageState.successStatus;
 
   const handleGenerateZip = async () => {
     if (mode === "text") {

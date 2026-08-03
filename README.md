@@ -31,13 +31,10 @@ A modern browser-based favicon generator to create text favicons, upload images,
 
 
 
----
-
 |  **Text Designer** | **Image Generator** |  **Favicon Checker** |
 |:--------------------:|:----------------------:|:----------------------:|
 | Fonts • Colors • Shapes • Gradients • Shadows • Borders • Live Preview | PNG • JPG • SVG • WebP → Generates every favicon size automatically | Preview favicon • Detect icon files • Metadata • Open Graph • Theme Color |
 
----
 
 ###  Export Package
 
@@ -274,7 +271,7 @@ npm run lint
 
 # Architecture Notes
 
-<details>
+<details open>
 
 <summary><strong>Click to expand implementation details</strong></summary>
 
