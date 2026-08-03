@@ -42,7 +42,7 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <div className="py-26 space-y-12">
+    <div className="py-26  md:pt-40 md:pb-20 space-y-8">
       <div className="text-center">
         <h2 className="text-4xl flex flex-col items-center font-bold tracking-tight text-[var(--text)]">
           <span className="text-black px-2 py-1">Powerful Features</span>{" "}
@@ -57,14 +57,14 @@ export function FeaturesSection() {
         {features.map((feature, idx) => {
           const Icon = feature.icon;
           return (
-            <div key={idx} className="p-12 border-b border-[var(--border)]">
+            <div key={idx} className="p-8 border-b border-[var(--border)]">
               <div className="flex items-center justify-start gap-3 mb-4">
                 <Icon className="w-5 h-5" />
-                <h4 className="text-[18px] font-bold tracking-tight text-[var(--text)]">
+                <h4 className="text-[16px] font-bold tracking-tight text-[var(--text)]">
                   {feature.title}
                 </h4>
               </div>
-              <p className="text-[16px] leading-relaxed text-[var(--text-muted)]">
+              <p className="text-[14px] leading-relaxed text-[var(--text-muted)]">
                 {feature.description}
               </p>
             </div>

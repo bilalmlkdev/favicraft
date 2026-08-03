@@ -42,7 +42,7 @@ export default function GeneratorWorkspace({ mode, setMode }: Props) {
       setIsSwitching(false);
       setPendingMode(null);
       switchTimeoutRef.current = null;
-    }, 2000);
+    }, 500);
   };
 
   // Cleanup on unmount

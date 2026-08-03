@@ -6,14 +6,13 @@ import { Footer } from "./components/layout/Footer";
 import { FeaturesSection } from "./components/sections/FeaturesSection";
 import { FaqSection } from "./components/sections/FaqSection";
 import { TestimonialsSection } from "./components/sections/TestimoinalsSection";
-import { HowItWorksSection } from "./components/sections/HowitWorksSection";
 import GeneratorWorkspace from "./components/generator/GeneratorWorkspace";
 import { Loader } from "./components/ui/Loader";
 import  type { Mode } from "./types";
 
 export default function App() {
   const lenisRef = useRef<Lenis | null>(null);
-  const [mode, setMode] = useState<Mode>("text");
+  const [mode, setMode] = useState<Mode>("image");
   const [isAppLoading, setIsAppLoading] = useState(true);
 
   useEffect(() => {
@@ -89,7 +88,6 @@ export default function App() {
         </div>
 
         <FeaturesSection />
-        <HowItWorksSection />
         <TestimonialsSection />
         <FaqSection />
       </main>
