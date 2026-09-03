@@ -21,10 +21,10 @@ export function Footer() {
           <p>
             Made by{" "}
             <a
-              href="https://github.com/byllzz"
+              href="https://github.com/bilalmlkdev"
               className="hover:text-[var(--accent)] transition-colors"
             >
-              Bilal Malik (byllzz)
+              Bilal Malik (bilalmlkdev)
             </a>
           </p>
         </div>

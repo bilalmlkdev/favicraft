@@ -5,10 +5,10 @@ import Header from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
 import { FeaturesSection } from "./components/sections/FeaturesSection";
 import { FaqSection } from "./components/sections/FaqSection";
-import { TestimonialsSection } from "./components/sections/TestimoinalsSection";
+import { TestimonialsSection } from "./components/sections/TestimonialsSection"; //  updated import
 import GeneratorWorkspace from "./components/generator/GeneratorWorkspace";
 import { Loader } from "./components/ui/Loader";
-import  type { Mode } from "./types";
+import type { Mode } from "./types";
 
 export default function App() {
   const lenisRef = useRef<Lenis | null>(null);
@@ -31,16 +31,6 @@ export default function App() {
     const timer = setTimeout(() => setIsAppLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
-
-  // const scrollToGenerator = () => {
-  //   if (lenisRef.current) {
-  //     lenisRef.current.scrollTo("#generator", { duration: 1.2 });
-  //   } else {
-  //     document
-  //       .getElementById("generator")
-  //       ?.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // };
 
   if (isAppLoading) {
     return (

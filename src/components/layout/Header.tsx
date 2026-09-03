@@ -6,7 +6,7 @@ export default function Header() {
   const [stars, setStars] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("https://api.github.com/repos/byllzz/favicraft")
+    fetch("https://api.github.com/repos/bilalmlkdev/favicraft")
       .then((res) => res.json())
       .then((data) => {
         if (typeof data.stargazers_count === "number") {
@@ -26,7 +26,7 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-1">
           <a
-            href="https://github.com/byllzz/favicraft"
+            href="https://github.com/bilalmlkdev/favicraft"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white text-black border border-white/10transition-colors text-[13px] font-medium"
