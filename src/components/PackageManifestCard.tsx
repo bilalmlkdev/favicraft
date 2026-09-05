@@ -1,44 +1,35 @@
 interface FileRow {
-  tag: string
+  size: string
   name: string
   desc: string
 }
 
 const FILES: FileRow[] = [
-  { tag: 'ICO', name: 'favicon.ico', desc: 'Legacy browser fallback' },
-  { tag: '16', name: 'favicon-16x16.png', desc: 'Browser tabs' },
-  { tag: '32', name: 'favicon-32x32.png', desc: 'HiDPI tabs' },
-  { tag: '180', name: 'apple-touch-icon.png', desc: 'iPhone and iPad home screens' },
-  { tag: '192', name: 'android-chrome-192x192.png', desc: 'Android home screens' },
-  { tag: '512', name: 'android-chrome-512x512.png', desc: 'PWA install icon' },
-  { tag: 'JSON', name: 'site.webmanifest', desc: 'Install metadata' },
+  { size: 'ICO', name: 'favicon.ico', desc: 'legacy fallback' },
+  { size: '16', name: 'favicon-16x16.png', desc: 'browser tabs' },
+  { size: '32', name: 'favicon-32x32.png', desc: 'hiDPI tabs' },
+  { size: '180', name: 'apple-touch-icon.png', desc: 'iOS home screen' },
+  { size: '192', name: 'android-chrome-192x192.png', desc: 'android home screen' },
+  { size: '512', name: 'android-chrome-512x512.png', desc: 'PWA install' },
+  { size: 'JSON', name: 'site.webmanifest', desc: 'install metadata' },
 ]
 
 export default function PackageManifestCard() {
   return (
-    <div className="rounded-lg border border-line-dark bg-ink-soft">
-      <div className="flex items-center justify-between border-b border-line-dark px-4 py-3">
-        <span className="text-[12px] font-medium uppercase tracking-wide text-muted-dark">
-          Complete favicon package
-        </span>
-        <span className="text-[12px] text-muted-dark">{FILES.length} files</span>
-      </div>
-      <ul className="divide-y divide-line-dark">
+    <div className="font-mono">
+      <p className="mb-3 text-[13px] text-fg">
+        <span className="text-amber">#</span> package contents ({FILES.length} files)
+      </p>
+      <hr className="dotted-rule mb-3" />
+      <ul className="space-y-2">
         {FILES.map((f) => (
-          <li key={f.name} className="flex items-center gap-3 px-4 py-3">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-ink-elevated text-[10px] font-semibold tabular text-muted-dark">
-              {f.tag}
-            </span>
-            <div className="min-w-0">
-              <p className="truncate font-mono text-[13px] text-[#EDEBE5]">{f.name}</p>
-              <p className="truncate text-[12.5px] text-muted-dark">{f.desc}</p>
-            </div>
+          <li key={f.name} className="flex items-baseline gap-2 text-[12.5px]">
+            <span className="w-8 shrink-0 text-muted-dark tabular">{f.size}</span>
+            <span className="min-w-0 flex-1 truncate text-fg">{f.name}</span>
+            <span className="shrink-0 text-muted-dark">{f.desc}</span>
           </li>
         ))}
       </ul>
-      <p className="border-t border-line-dark px-4 py-3 text-[12px] leading-relaxed text-muted-dark">
-        Everything downloads in one ZIP with the filenames used in the install steps.
-      </p>
     </div>
   )
 }

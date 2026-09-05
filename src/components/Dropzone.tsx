@@ -32,31 +32,12 @@ export default function Dropzone({
         handleFiles(e.dataTransfer.files)
       }}
       onClick={() => inputRef.current?.click()}
-      className={`flex min-h-[220px] cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed px-6 py-10 text-center transition-colors ${
-        dragOver
-          ? 'border-amber bg-amber/5'
-          : 'border-line-dark bg-ink-elevated hover:border-[#3a3f46]'
+      className={`flex min-h-[160px] cursor-pointer flex-col items-center justify-center gap-2 border border-dashed px-6 py-10 text-center transition-colors ${
+        dragOver ? 'border-amber text-amber' : 'border-line-dark text-muted-dark hover:border-fg hover:text-fg'
       }`}
     >
-      <svg
-        width="28"
-        height="28"
-        viewBox="0 0 24 24"
-        fill="none"
-        className="mb-1 text-muted-dark"
-      >
-        <path
-          d="M12 16V4m0 0L7 9m5-5l5 5M5 20h14"
-          stroke="currentColor"
-          strokeWidth="1.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p className="text-[14px] font-medium text-[#EDEBE5]">
-        Drag and drop your file here
-      </p>
-      <p className="text-[13px] text-muted-dark">or click to browse — {hint}</p>
+      <p className="text-[13.5px]">drop file here</p>
+      <p className="text-[12.5px] text-muted-dark">or click to browse - {hint}</p>
       <input
         ref={inputRef}
         type="file"

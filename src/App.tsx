@@ -6,7 +6,6 @@ import ImageGenerator from './pages/ImageGenerator'
 import TextGenerator from './pages/TextGenerator'
 import EmojiGenerator from './pages/EmojiGenerator'
 import SvgGenerator from './pages/SvgGenerator'
-import FaviconChecker from './pages/FaviconChecker'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -20,7 +19,6 @@ export default function App() {
           <Route path="/text" element={<TextGenerator />} />
           <Route path="/emoji" element={<EmojiGenerator />} />
           <Route path="/svg" element={<SvgGenerator />} />
-          <Route path="/checker" element={<FaviconChecker />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

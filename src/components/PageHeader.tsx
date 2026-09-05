@@ -8,20 +8,21 @@ export default function PageHeader({
   description?: string
 }) {
   return (
-    <div className="border-b border-line-dark bg-ink-soft">
-      <div className="mx-auto max-w-[1200px] px-5 py-10 md:py-12">
-        {eyebrow && (
-          <p className="mb-2 text-[13px] font-medium text-amber">{eyebrow}</p>
-        )}
-        <h1 className="max-w-2xl font-display text-[32px] font-semibold leading-[1.15] tracking-tight text-[#F5F3EE] md:text-[38px]">
-          {title}
-        </h1>
-        {description && (
-          <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-muted-dark">
-            {description}
-          </p>
-        )}
-      </div>
+    <div className="mx-auto max-w-[1100px] px-5 pb-10 pt-14 font-mono">
+      {eyebrow && (
+        <p className="mb-3 text-[12.5px] text-muted-dark">{eyebrow}</p>
+      )}
+      <h1 className="animate-rise-in max-w-2xl text-[26px] font-bold leading-snug text-fg underline decoration-line-dark decoration-2 underline-offset-8">
+        {title}
+      </h1>
+      {description && (
+        <p
+          className="animate-rise-in mt-5 max-w-xl text-[13.5px] leading-relaxed text-muted-dark"
+          style={{ animationDelay: '50ms', animationFillMode: 'backwards' }}
+        >
+          {description}
+        </p>
+      )}
     </div>
   )
 }

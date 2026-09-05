@@ -4,6 +4,7 @@ import WorkspaceLayout from '../components/WorkspaceLayout'
 import Dropzone from '../components/Dropzone'
 import Button from '../components/Button'
 import ShapeSelector from '../components/ShapeSelector'
+import HeroPreview from '../components/HeroPreview'
 import PreviewGrid from '../components/PreviewGrid'
 import BrowserTabPreview from '../components/BrowserTabPreview'
 import InstallSteps from '../components/InstallSteps'
@@ -14,7 +15,7 @@ export default function SvgGenerator() {
   const [svgMarkup, setSvgMarkup] = useState<string>('')
   const [fileName, setFileName] = useState('')
   const [shape, setShape] = useState<ShapeStyle>('none')
-  const [bgColor, setBgColor] = useState('#F7F6F3')
+  const [bgColor, setBgColor] = useState('#1a1a1a')
   const [busy, setBusy] = useState(false)
 
   const onFile = useCallback(async (file: File) => {
@@ -35,6 +36,8 @@ export default function SvgGenerator() {
     }
   }, [svgMarkup, shape, bgColor])
 
+  const refreshKey = `${shape}-${bgColor}-${fileName}`
+
   async function handleDownload() {
     if (!svgMarkup) return
     setBusy(true)
@@ -51,80 +54,58 @@ export default function SvgGenerator() {
   return (
     <div>
       <PageHeader
-        eyebrow="Converter"
-        title="SVG to favicon"
-        description="Convert vector artwork into favicon.ico, PNG icons, Apple touch icon, Android icons, and a web manifest."
+        eyebrow="04 - converter"
+        title="svg to favicon"
+        description="Upload vector artwork. It's rasterized in your browser at every required output size for maximum sharpness."
       />
 
-      <div className="mx-auto max-w-[1200px] space-y-10 px-5 py-10">
+      <div className="mx-auto max-w-[1100px] space-y-14 px-5 pb-16 font-mono">
         <WorkspaceLayout
           controls={
-            <div className="space-y-6">
-              <div>
-                <h2 className="mb-1 font-display text-[18px] font-semibold text-[#F2F0EA]">
-                  Convert an SVG to a favicon
-                </h2>
-                <p className="text-[13.5px] leading-relaxed text-muted-dark">
-                  Upload an .svg file. Vector artwork is rasterized in your browser at
-                  every required output size for maximum sharpness.
-                </p>
-              </div>
-
-              <Dropzone onFile={onFile} accept="image/svg+xml,.svg" hint="SVG only" />
+            <div className="space-y-7">
+              <Dropzone onFile={onFile} accept="image/svg+xml,.svg" hint="svg only" />
 
               {fileName && (
                 <p className="text-[13px] text-muted-dark">
-                  Loaded <span className="text-[#EDEBE5]">{fileName}.svg</span>
+                  loaded <span className="text-fg">{fileName}.svg</span>
                 </p>
               )}
 
               <ShapeSelector value={shape} onChange={setShape} />
 
               {shape !== 'none' && (
-                <label className="block">
-                  <span className="mb-1.5 block text-[13px] font-medium text-muted-dark">
-                    Background color
-                  </span>
-                  <div className="flex items-center gap-2 rounded-md border border-line-dark bg-ink-elevated px-2.5 py-2">
+                <div className="max-w-[240px]">
+                  <p className="mb-2 text-[12.5px] text-muted-dark">background color</p>
+                  <div className="flex items-center gap-2.5 border border-dashed border-line-dark px-3 py-2">
                     <input
                       type="color"
                       value={bgColor}
                       onChange={(e) => setBgColor(e.target.value)}
-                      className="h-6 w-6 cursor-pointer rounded border-0"
+                      className="h-4 w-4 cursor-pointer border-0"
                     />
-                    <span className="font-mono text-[13px] text-[#EDEBE5]">{bgColor}</span>
+                    <span className="text-[13px] text-fg">{bgColor}</span>
                   </div>
-                </label>
+                </div>
               )}
 
-              <Button
-                variant="primary"
-                onClick={handleDownload}
-                disabled={!svgMarkup || busy}
-                className="w-full"
-              >
-                {busy ? 'Building package…' : 'Download favicon package'}
-              </Button>
-              <p className="text-[12px] text-muted-dark">
-                Tip: simplify paths and remove embedded fonts before uploading for the
-                cleanest small-size output.
-              </p>
+              <div className="flex items-center gap-4 pt-2">
+                <Button variant="primary" onClick={handleDownload} disabled={!svgMarkup || busy}>
+                  {busy ? 'building package...' : 'download package'}
+                </Button>
+                <span className="text-[12.5px] text-muted-dark">
+                  simplify paths before uploading for the cleanest result.
+                </span>
+              </div>
             </div>
           }
           preview={
-            <>
-              <div className="rounded-lg border border-line-dark bg-ink-soft p-5">
-                <p className="mb-4 text-[12px] font-medium uppercase tracking-wide text-muted-dark">
-                  Preview
-                </p>
-                <PreviewGrid render={render} refreshKey={`${shape}-${bgColor}-${fileName}`} />
+            <div className="space-y-5">
+              <HeroPreview render={render} refreshKey={refreshKey} />
+              <div className="dashed-box p-5">
+                <PreviewGrid render={render} refreshKey={refreshKey} />
               </div>
-              <BrowserTabPreview
-                render={render}
-                refreshKey={`${shape}-${bgColor}-${fileName}`}
-                pageTitle={fileName || 'My Website'}
-              />
-            </>
+              <BrowserTabPreview render={render} refreshKey={refreshKey} pageTitle={fileName || 'my website'} />
+            </div>
           }
         />
 

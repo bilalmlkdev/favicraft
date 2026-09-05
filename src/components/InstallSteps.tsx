@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { buildHtmlSnippet } from '../lib/packageBuilder'
 import PackageManifestCard from './PackageManifestCard'
+import Button from './Button'
 
 const STEPS = [
   {
     title: 'Download the ZIP package',
-    body: 'Use the download button above after your icon looks right.',
+    body: 'Use the download button above once your icon looks right.',
   },
   {
     title: 'Upload the files to your site root',
@@ -17,7 +18,7 @@ const STEPS = [
   },
   {
     title: 'Test the live page',
-    body: 'After deployment, run the checker against your public URL to confirm browsers can find every icon.',
+    body: 'After deployment, confirm the icon shows up correctly in a real browser tab.',
   },
 ]
 
@@ -32,20 +33,19 @@ export default function InstallSteps() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
-      <div className="rounded-lg border border-line-dark bg-ink-soft p-6">
-        <h2 className="mb-6 font-display text-[19px] font-semibold text-[#F2F0EA]">
+    <div className="grid gap-12 pt-2 font-mono lg:grid-cols-[1fr_260px]">
+      <hr className="dotted-rule col-span-full" />
+      <div>
+        <h2 className="mb-6 text-[15px] font-bold text-fg underline decoration-line-dark underline-offset-4">
           Install your favicon
         </h2>
-        <ol className="space-y-5">
+        <ol className="space-y-4">
           {STEPS.map((s, i) => (
-            <li key={s.title} className="flex gap-3.5">
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber text-[12px] font-semibold text-ink">
-                {i + 1}
-              </span>
+            <li key={s.title} className="flex gap-3">
+              <span className="pt-0.5 text-[13px] text-muted-dark tabular">{i + 1}.</span>
               <div>
-                <p className="text-[14.5px] font-medium text-[#EDEBE5]">{s.title}</p>
-                <p className="mt-0.5 text-[13.5px] leading-relaxed text-muted-dark">
+                <p className="text-[13.5px] text-fg">{s.title}</p>
+                <p className="mt-0.5 max-w-md text-[12.5px] leading-relaxed text-muted-dark">
                   {s.body}
                 </p>
               </div>
@@ -53,17 +53,38 @@ export default function InstallSteps() {
           ))}
         </ol>
 
-        <div className="mt-6 rounded-md border border-line-dark bg-ink">
-          <pre className="overflow-x-auto p-4 font-mono text-[12.5px] leading-relaxed text-[#c9c6bd]">
+        <div className="mt-6 border border-dashed border-line-dark">
+          <pre className="overflow-x-auto p-4 text-[12px] leading-relaxed text-fg">
             {snippet}
           </pre>
         </div>
-        <button
-          onClick={copySnippet}
-          className="mt-3 rounded-md border border-line-dark px-3.5 py-2 text-[13px] font-medium text-[#EDEBE5] transition-colors hover:border-[#3a3f46]"
-        >
-          {copied ? 'Copied' : 'Copy HTML tags'}
-        </button>
+        <div className="mt-3">
+          <Button variant="secondary" onClick={copySnippet}>
+            {copied ? (
+              <>
+                <svg
+                  key="check"
+                  className="animate-pop-check"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M5 13l4 4L19 7"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                copied
+              </>
+            ) : (
+              'copy html tags'
+            )}
+          </Button>
+        </div>
       </div>
 
       <PackageManifestCard />

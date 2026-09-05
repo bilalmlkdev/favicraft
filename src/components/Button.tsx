@@ -13,17 +13,27 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 rounded-md px-4 py-2.5 text-[13.5px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40'
+    'inline-flex items-center justify-center gap-2 px-4 py-2 font-mono text-[13px] transition-colors active:translate-y-px disabled:cursor-not-allowed disabled:opacity-40 disabled:active:translate-y-0'
   const variants: Record<string, string> = {
-    primary: 'bg-amber text-ink hover:bg-[#f7b246]',
-    secondary:
-      'border border-line-dark bg-ink-elevated text-[#EDEBE5] hover:border-[#3a3f46]',
-    ghost: 'text-muted-dark hover:text-[#EDEBE5]',
+    primary: 'border border-fg bg-fg text-ink hover:bg-transparent hover:text-fg',
+    secondary: 'border border-dashed border-line-dark text-fg hover:border-solid hover:border-fg',
+    ghost: 'text-muted-dark hover:text-fg',
   }
+
+  function bracket(content: React.ReactNode) {
+    return (
+      <>
+        <span className="text-muted-dark">[</span>
+        {content}
+        <span className="text-muted-dark">]</span>
+      </>
+    )
+  }
+
   return (
     <button className={`${base} ${variants[variant]} ${className}`} {...rest}>
       {icon}
-      {children}
+      {variant === 'ghost' ? children : bracket(children)}
     </button>
   )
 }

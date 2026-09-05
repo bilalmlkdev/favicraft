@@ -52,7 +52,7 @@ export function buildHtmlSnippet(): string {
 
 export function buildAttribution(licenseNote?: string): string {
   const lines = [
-    'FaviCraft — generated favicon package',
+    'FaviCraft - generated favicon package',
     `Generated: ${new Date().toISOString()}`,
   ]
   if (licenseNote) lines.push('', licenseNote)

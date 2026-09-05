@@ -1,10 +1,10 @@
 import { ShapeStyle } from '../lib/rasterize'
 
 const OPTIONS: { value: ShapeStyle; label: string }[] = [
-  { value: 'none', label: 'None' },
-  { value: 'square', label: 'Square' },
-  { value: 'rounded', label: 'Rounded' },
-  { value: 'circle', label: 'Circle' },
+  { value: 'none', label: 'none' },
+  { value: 'square', label: 'square' },
+  { value: 'rounded', label: 'rounded' },
+  { value: 'circle', label: 'circle' },
 ]
 
 export default function ShapeSelector({
@@ -16,21 +16,19 @@ export default function ShapeSelector({
 }) {
   return (
     <div>
-      <span className="mb-1.5 block text-[13px] font-medium text-muted-dark">
-        Background shape
-      </span>
-      <div className="grid grid-cols-4 gap-1.5">
+      <p className="mb-2 text-[12.5px] text-muted-dark">background shape</p>
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[13px]">
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}
             onClick={() => onChange(opt.value)}
-            className={`rounded-md border px-2 py-2 text-[12.5px] font-medium transition-colors ${
+            className={
               value === opt.value
-                ? 'border-amber bg-amber/10 text-amber'
-                : 'border-line-dark bg-ink-elevated text-muted-dark hover:text-[#EDEBE5]'
-            }`}
+                ? 'text-amber underline underline-offset-4'
+                : 'text-muted-dark transition-colors hover:text-fg'
+            }
           >
-            {opt.label}
+            [{value === opt.value ? 'x' : ' '}] {opt.label}
           </button>
         ))}
       </div>

@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader'
 import WorkspaceLayout from '../components/WorkspaceLayout'
 import Button from '../components/Button'
 import ShapeSelector from '../components/ShapeSelector'
+import HeroPreview from '../components/HeroPreview'
 import PreviewGrid from '../components/PreviewGrid'
 import BrowserTabPreview from '../components/BrowserTabPreview'
 import InstallSteps from '../components/InstallSteps'
@@ -15,8 +16,9 @@ export default function EmojiGenerator() {
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const [shape, setShape] = useState<ShapeStyle>('none')
-  const [bgColor, setBgColor] = useState('#F7F6F3')
+  const [bgColor, setBgColor] = useState('#1a1a1a')
   const [busy, setBusy] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const filtered = useMemo(() => {
     return EMOJI_LIST.filter((e) => {
@@ -29,6 +31,8 @@ export default function EmojiGenerator() {
   const render = useMemo(() => {
     return (size: number) => renderEmojiIcon(size, selected.char, bgColor, shape)
   }, [selected, bgColor, shape])
+
+  const refreshKey = `${selected.char}-${shape}-${bgColor}`
 
   async function handleDownload() {
     setBusy(true)
@@ -44,53 +48,59 @@ export default function EmojiGenerator() {
     }
   }
 
-  const refreshKey = `${selected.char}-${shape}-${bgColor}`
+  function copyEmoji() {
+    navigator.clipboard.writeText(selected.char)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 1600)
+  }
 
   return (
     <div>
       <PageHeader
-        eyebrow="Generator"
-        title={`${selected.char} ${selected.name} — copy or download`}
-        description="Browse the emoji library, preview it in browser tab sizes, and download a ready-to-install favicon package."
+        eyebrow="03 - generator"
+        title={`${selected.char}  ${selected.name.toLowerCase()}`}
+        description="Browse the emoji library, preview it in real browser tab sizes, and download a ready-to-install package."
       />
 
-      <div className="mx-auto max-w-[1200px] space-y-10 px-5 py-10">
+      <div className="mx-auto max-w-[1100px] space-y-14 px-5 pb-16 font-mono">
         <WorkspaceLayout
           controls={
-            <div className="space-y-5">
+            <div className="space-y-6">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search emoji…"
-                className="w-full rounded-md border border-line-dark bg-ink-elevated px-3.5 py-2.5 text-[13.5px] text-[#EDEBE5] outline-none focus:border-amber"
+                placeholder="search emoji..."
+                className="w-full max-w-[320px] border border-dashed border-line-dark px-3.5 py-2.5 text-[13.5px] text-fg outline-none transition-colors focus:border-solid focus:border-fg"
               />
 
-              <div className="flex flex-wrap gap-1.5">
-                {['All', ...EMOJI_CATEGORIES].map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setActiveCategory(c)}
-                    className={`rounded-md border px-2.5 py-1.5 text-[12.5px] font-medium transition-colors ${
-                      activeCategory === c
-                        ? 'border-amber bg-amber/10 text-amber'
-                        : 'border-line-dark bg-ink-elevated text-muted-dark hover:text-[#EDEBE5]'
-                    }`}
-                  >
-                    {c}
-                  </button>
+              <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[12.5px]">
+                {['All', ...EMOJI_CATEGORIES].map((c, i, arr) => (
+                  <span key={c} className="flex items-center gap-3">
+                    <button
+                      onClick={() => setActiveCategory(c)}
+                      className={
+                        activeCategory === c
+                          ? 'text-amber underline underline-offset-4'
+                          : 'text-muted-dark transition-colors hover:text-fg'
+                      }
+                    >
+                      {c.toLowerCase()}
+                    </button>
+                    {i < arr.length - 1 && <span className="text-line-dark">|</span>}
+                  </span>
                 ))}
               </div>
 
-              <div className="grid max-h-[280px] grid-cols-8 gap-1.5 overflow-y-auto rounded-md border border-line-dark bg-ink-elevated p-2.5">
+              <div className="dashed-box grid max-h-[280px] grid-cols-8 gap-1 overflow-y-auto p-3">
                 {filtered.map((e) => (
                   <button
                     key={e.char + e.name}
                     onClick={() => setSelected(e)}
                     title={e.name}
-                    className={`flex aspect-square items-center justify-center rounded-md text-[19px] transition-colors ${
+                    className={`flex aspect-square items-center justify-center text-[19px] transition-colors duration-150 ${
                       selected.char === e.char
-                        ? 'bg-amber/15 ring-1 ring-amber'
+                        ? 'bg-ink-elevated ring-1 ring-fg'
                         : 'hover:bg-ink-soft'
                     }`}
                   >
@@ -99,7 +109,7 @@ export default function EmojiGenerator() {
                 ))}
                 {filtered.length === 0 && (
                   <p className="col-span-8 py-6 text-center text-[13px] text-muted-dark">
-                    No emoji match “{query}”
+                    no emoji match "{query}"
                   </p>
                 )}
               </div>
@@ -107,55 +117,42 @@ export default function EmojiGenerator() {
               <ShapeSelector value={shape} onChange={setShape} />
 
               {shape !== 'none' && (
-                <label className="block">
-                  <span className="mb-1.5 block text-[13px] font-medium text-muted-dark">
-                    Background color
-                  </span>
-                  <div className="flex items-center gap-2 rounded-md border border-line-dark bg-ink-elevated px-2.5 py-2">
+                <div className="max-w-[240px]">
+                  <p className="mb-2 text-[12.5px] text-muted-dark">background color</p>
+                  <div className="flex items-center gap-2.5 border border-dashed border-line-dark px-3 py-2">
                     <input
                       type="color"
                       value={bgColor}
                       onChange={(e) => setBgColor(e.target.value)}
-                      className="h-6 w-6 cursor-pointer rounded border-0"
+                      className="h-4 w-4 cursor-pointer border-0"
                     />
-                    <span className="font-mono text-[13px] text-[#EDEBE5]">{bgColor}</span>
+                    <span className="text-[13px] text-fg">{bgColor}</span>
                   </div>
-                </label>
+                </div>
               )}
 
-              <div className="flex gap-2.5">
-                <Button
-                  variant="secondary"
-                  className="flex-1"
-                  onClick={() => navigator.clipboard.writeText(selected.char)}
-                >
-                  Copy emoji
+              <div className="flex items-center gap-3 pt-2">
+                <Button variant="secondary" onClick={copyEmoji}>
+                  {copied ? 'copied' : 'copy emoji'}
                 </Button>
-                <Button
-                  variant="primary"
-                  className="flex-1"
-                  onClick={handleDownload}
-                  disabled={busy}
-                >
-                  {busy ? 'Building…' : 'Download package'}
+                <Button variant="primary" onClick={handleDownload} disabled={busy}>
+                  {busy ? 'building...' : 'download package'}
                 </Button>
               </div>
             </div>
           }
           preview={
-            <>
-              <div className="rounded-lg border border-line-dark bg-ink-soft p-5">
-                <p className="mb-4 text-[12px] font-medium uppercase tracking-wide text-muted-dark">
-                  Preview
-                </p>
+            <div className="space-y-5">
+              <HeroPreview render={render} refreshKey={refreshKey} />
+              <div className="dashed-box p-5">
                 <PreviewGrid render={render} refreshKey={refreshKey} />
               </div>
-              <BrowserTabPreview render={render} refreshKey={refreshKey} pageTitle={selected.name} />
-              <div className="rounded-lg border border-line-dark bg-ink-soft p-4 text-[12.5px] leading-relaxed text-muted-dark">
-                Emoji glyphs render using your operating system's emoji font. Downloaded
+              <BrowserTabPreview render={render} refreshKey={refreshKey} pageTitle={selected.name.toLowerCase()} />
+              <p className="text-[12.5px] leading-relaxed text-muted-dark">
+                emoji glyphs render using your operating system's emoji font - downloaded
                 PNGs reflect the font active on this machine at export time.
-              </div>
-            </>
+              </p>
+            </div>
           }
         />
 
