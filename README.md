@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://favicraft.vercel.app/">
-    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/src/public/android-chrome-192x192.png" alt="favicraft Logo" width="100%" height="120">
+    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/favicon.ico" alt="favicraft Logo">
   </a>
 
 # Favicraft
@@ -19,7 +19,7 @@ Generate favicon.ico, PNG icons, Apple touch icons, and web manifests <br> from 
   <i>Follow on Github <a href="https://github.com/bilalmlkdev" target="_blank">bilalmlkdev</a></i>
 </p>
 
-[![favicraft Dashboard](https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/src/public/preview.png)](https://favicraft.vercel.app/)
+[![favicraft Dashboard](https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/preview.png)](https://favicraft.vercel.app/)
 
 # Building FaviCraft
 

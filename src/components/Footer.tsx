@@ -1,3 +1,4 @@
+// src/components/Footer.tsx
 const COLUMNS = [
   {
     title: "Tools",
@@ -50,27 +51,30 @@ export default function Footer() {
                 {col.title}
               </p>
               <ul className="space-y-1.5 text-muted-dark">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    {link.external ? (
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-fg transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <a
-                        href={link.href}
-                        className="hover:text-fg transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    )}
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const isExternal = "external" in link && link.external;
+                  return (
+                    <li key={link.label}>
+                      {isExternal ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-fg transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="hover:text-fg transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
