@@ -13,6 +13,12 @@ Generate favicon.ico, PNG icons, Apple touch icons, and web manifests <br> from 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
 
+<p align="center">
+  <i>Created by <a href="https://bilalmlkdev.vercel.app" target="_blank">Bilal Malik</a></i><br>
+  <i>Follow on Github <a href="https://github.com/bilalmlkdev" target="_blank">bilalmlkdev</a></i>
+</p>
+
+
 [![favicraft Dashboard](https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/preview.png)](https://favicraft.vercel.app/)
 
 </div>
