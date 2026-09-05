@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://favicraft.vercel.app/">
-    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/apple-touch-icon.png" alt="favicraft Logo" width="17%">
+    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/apple-touch-icon.png" alt="favicraft Logo" width="15%">
   </a>
 
 # Favicraft
