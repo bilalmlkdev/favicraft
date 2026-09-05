@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://favicraft.vercel.app/">
-    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/favicon.ico" alt="favicraft Logo">
+    <img src="https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/apple-touch-icon.png" alt="favicraft Logo">
   </a>
 
 # Favicraft
@@ -12,14 +12,11 @@ Generate favicon.ico, PNG icons, Apple touch icons, and web manifests <br> from 
 [![GitHub Stars](https://img.shields.io/github/stars/bilalmlkdev/favicraft?style=for-the-badge&logo=github&color=yellow)](https://github.com/bilalmlkdev/favicraft.git)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 
-</div>
-
-<p align="center">
-  <i>Created by <a href="https://bilalmlkdev.vercel.app" target="_blank">Bilal Malik</a></i><br>
-  <i>Follow on Github <a href="https://github.com/bilalmlkdev" target="_blank">bilalmlkdev</a></i>
-</p>
 
 [![favicraft Dashboard](https://raw.githubusercontent.com/bilalmlkdev/favicraft/main/public/preview.png)](https://favicraft.vercel.app/)
+
+</div>
+
 
 # Building FaviCraft
 

@@ -47,7 +47,7 @@ export default function NavBar() {
             rel="noreferrer"
             className="hidden text-muted-dark transition-colors hover:text-fg sm:inline"
           >
-          GitHub
+          Give a Star!
           </a>
         </div>
       </div>
